@@ -55,5 +55,4 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(500)
                 .body(Error.of(500, "internal server error"));
     }
-
 }

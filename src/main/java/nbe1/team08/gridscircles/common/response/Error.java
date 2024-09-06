@@ -13,5 +13,4 @@ public class Error {
     public static Error of(int code, String msg) {
         return new Error(code, msg);
     }
-
 }
