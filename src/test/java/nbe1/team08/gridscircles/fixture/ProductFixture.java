@@ -1,6 +1,5 @@
 package nbe1.team08.gridscircles.fixture;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 import nbe1.team08.gridscircles.product.domain.Product;
 
@@ -14,9 +13,7 @@ public final class ProductFixture {
                 "믹스커피",
                 1000,
                 "우리들의 국민 커피",
-                LocalDateTime.now(),
-                "테스트 이미지 url1",
-                null
+                "테스트 이미지 url1"
         );
     }
 
@@ -27,9 +24,7 @@ public final class ProductFixture {
                 "믹스커피",
                 2000,
                 "우리들의 국민 커피2",
-                LocalDateTime.now(),
-                "테스트 이미지 url2",
-                null
+                "테스트 이미지 url2"
         );
     }
 
