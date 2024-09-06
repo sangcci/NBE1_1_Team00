@@ -11,9 +11,7 @@ Product(Coffee)
 - [x] 관리자는 커피 상품에 대한 CRUD를 할 수 있다
   - [x] 이름이 같은 상품이 존재한다면 `IllegalARgumentException` 예외를 발생시킨다.
   - ~~재고 0 이하로 떨어지면 오류 발생~~ -> 현재 도메인에서는 구현하지 않는다
-- [ ] 관리자는 모든 주문 내역들을 볼 수 있음 (GET)
-  - [ ] ~~상태(배송 출발, 준비 중…)에 따라서 서로 다른 것을 보여주는 API 추가~~ -> 추후에 추가
-  - [ ] ~~페이징 추가~~ -> 추후에 추가
+
 
 Order
 
@@ -23,12 +21,15 @@ Order
   - [ ] 필수적으로 이메일, 주소, 우편번호 입력받아 결제하기 버튼 클릭시 주문 생성
   - [ ] 총 금액을 제공받는다
   - [ ] 오후 2시 이전 주문들은 주문 번호로 따로 분리
-- [ ] 자기가 주문한 주문내역을 볼 수 있음 (GET)
+- [ ] 본인이 주문한 주문내역을 볼 수 있음 (GET)
   - [ ] ~~페이징 기능 추가~~
-- [ ] 자기가 주문한 커피의 수량을 수정 할 수 있음 (PUT)
+- [ ] 본인이 주문한 커피의 수량을 수정 할 수 있음 (PUT)
   - [ ] 배송 중일 때 수정 불가
 - [ ] 고객은 주문을 취소할 수 있음 (DELETE)
   - [ ] 배송 중일때 취소 불가
+- [ ] 관리자는 모든 주문 내역들을 볼 수 있음 (GET)
+  - [ ] ~~상태(배송 출발, 준비 중…)에 따라서 서로 다른 것을 보여주는 API 추가~~ -> 추후에 추가
+  - [ ] ~~페이징 추가~~ -> 추후에 추가
 
 
 
@@ -39,12 +40,18 @@ Order
 
 ```gradle
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	runtimeOnly 'com.h2database:h2'
+
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
