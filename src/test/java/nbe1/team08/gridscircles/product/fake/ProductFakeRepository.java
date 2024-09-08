@@ -31,7 +31,8 @@ public class ProductFakeRepository implements ProductRepository {
 
     @Override
     public UUID save(Product product) {
-        return Objects.requireNonNull(products.put(product.getId(), product))
+        UUID uuid = UUID.randomUUID();
+        return Objects.requireNonNull(products.put(uuid, product))
                 .getId();
     }
 
