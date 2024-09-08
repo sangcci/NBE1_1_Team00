@@ -13,4 +13,8 @@ public class Success<T> {
     public static <T> Success<T> of(int code, T data) {
         return new Success<>(code, data);
     }
+
+    public static Success<String> of(int code, String msg) {
+        return new Success<>(code, msg);
+    }
 }
