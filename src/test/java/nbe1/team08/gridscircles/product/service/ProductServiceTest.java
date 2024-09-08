@@ -1,25 +1,22 @@
 package nbe1.team08.gridscircles.product.service;
 
-import static nbe1.team08.gridscircles.product.fixture.ProductFixture.상품_생성_1;
+import static nbe1.team08.gridscircles.fixture.ProductFixture.상품_생성_1;
 
 import java.util.NoSuchElementException;
-import nbe1.team08.gridscircles.product.fake.ProductFakeRepository;
 import nbe1.team08.gridscircles.product.domain.Product;
-import nbe1.team08.gridscircles.product.service.port.ProductRepository;
+import nbe1.team08.gridscircles.product.fake.ProductFakeRepository;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
 public class ProductServiceTest {
 
-    private final ProductRepository productRepository;
-
     private final ProductService productService;
 
     public ProductServiceTest() {
-        this.productRepository = new ProductFakeRepository();
         this.productService = new ProductService(
-                productRepository);
+                new ProductFakeRepository()
+        );
     }
 
     @Test

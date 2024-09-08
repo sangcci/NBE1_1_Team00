@@ -1,4 +1,4 @@
-package nbe1.team08.gridscircles.product.fixture;
+package nbe1.team08.gridscircles.fixture;
 
 import java.util.UUID;
 import nbe1.team08.gridscircles.product.domain.Product;
