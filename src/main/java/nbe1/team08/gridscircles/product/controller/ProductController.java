@@ -1,11 +1,9 @@
 package nbe1.team08.gridscircles.product.controller;
 
-import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nbe1.team08.gridscircles.common.response.Success;
-import nbe1.team08.gridscircles.product.domain.Product;
 import nbe1.team08.gridscircles.product.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,7 @@ public class ProductController {
 
     @GetMapping("/products")
     public ResponseEntity<Success<?>> findAll() {
-        List<Product> products = productService.findAll();
+        var products = productService.findAll();
         return ResponseEntity.ok().body(Success.of(200, products));
     }
 
@@ -29,7 +27,7 @@ public class ProductController {
     public ResponseEntity<Success<?>> findById(
             @PathVariable UUID uuid
     ) {
-        Product product = productService.findById(uuid);
+        var product = productService.findById(uuid);
         return ResponseEntity.ok().body(Success.of(200, product));
     }
 }

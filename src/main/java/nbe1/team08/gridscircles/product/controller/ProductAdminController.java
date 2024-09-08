@@ -4,8 +4,8 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nbe1.team08.gridscircles.common.response.Success;
-import nbe1.team08.gridscircles.product.controller.dto.ProductRequestDto;
-import nbe1.team08.gridscircles.product.domain.Product;
+import nbe1.team08.gridscircles.product.controller.dto.ProductCreate;
+import nbe1.team08.gridscircles.product.controller.dto.ProductUpdate;
 import nbe1.team08.gridscircles.product.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,33 +18,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class ProductAdminController {
 
     private final ProductService productService;
 
     @PostMapping("/products")
     public ResponseEntity<Success<?>> create(
-            @RequestBody ProductRequestDto productRequestDto
+            @RequestBody ProductCreate productCreate
     ) {
-        UUID id = productService.create(productRequestDto.to());
-        return ResponseEntity.ok().body(Success.of(200, id));
+        var uuid = productService.create(productCreate.to());
+        return ResponseEntity.ok()
+                .body(Success.of(200, uuid));
     }
 
     @PutMapping("/products")
     public ResponseEntity<Success<?>> update(
-            @RequestBody ProductRequestDto productRequestDto
+            @RequestBody ProductUpdate productUpdate
     ) {
-        Product updated = productService.update(productRequestDto.to());
-        return ResponseEntity.ok().body(Success.of(200, updated));
+        var updatedProduct = productService.update(productUpdate.to());
+        return ResponseEntity.ok()
+                .body(Success.of(200, updatedProduct));
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/products/{uuid}")
     public ResponseEntity<Success<?>> deleteById(
-            @PathVariable UUID id
+            @PathVariable UUID uuid
     ) {
-        productService.delete(id);
-        return ResponseEntity.ok().body(Success.of(200, "delete success"));
+        productService.delete(uuid);
+        return ResponseEntity.ok()
+                .body(Success.of(200, "Delete Product success"));
     }
 }

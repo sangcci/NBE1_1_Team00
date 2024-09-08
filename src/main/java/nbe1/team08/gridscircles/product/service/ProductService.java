@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import nbe1.team08.gridscircles.product.domain.Product;
 import nbe1.team08.gridscircles.product.service.port.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,26 +15,31 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
+    @Transactional(readOnly = true)
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Product findById(UUID id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Product not found"));
     }
 
+    @Transactional
     public UUID create(Product product) {
         return productRepository.save(product);
     }
 
-    public Product update(Product product) {
-        productRepository.findById(product.getId())
+    @Transactional
+    public Product update(Product newProduct) {
+        Product product = productRepository.findById(newProduct.getId())
                 .orElseThrow(() -> new NoSuchElementException("Product not found"));
 
-        return productRepository.update(product);
+        return product.update(newProduct);
     }
 
+    @Transactional
     public void delete(UUID id) {
         productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Product not found"));

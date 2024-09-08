@@ -27,4 +27,13 @@ public class Product extends BaseTime {
     private long price;
     private String description;
     private String imageUrl;
+
+    public Product update(Product newProduct) {
+        this.name = newProduct.getName();
+        this.category = newProduct.getCategory();
+        this.price = newProduct.getPrice();
+        this.description = newProduct.getDescription();
+        this.imageUrl = newProduct.getImageUrl();
+        return this;
+    }
 }
