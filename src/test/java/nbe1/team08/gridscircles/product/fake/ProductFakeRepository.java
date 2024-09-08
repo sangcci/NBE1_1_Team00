@@ -1,4 +1,4 @@
-package nbe1.team08.gridscircles.fake;
+package nbe1.team08.gridscircles.product.fake;
 
 import java.util.Collections;
 import java.util.HashMap;
