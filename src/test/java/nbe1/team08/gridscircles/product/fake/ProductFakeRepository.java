@@ -14,34 +14,34 @@ import nbe1.team08.gridscircles.product.service.port.ProductRepository;
 @Slf4j
 public class ProductFakeRepository implements ProductRepository {
 
-    private final Map<UUID, Product> clubs = Collections.synchronizedMap(new HashMap<>());
+    private final Map<UUID, Product> products = Collections.synchronizedMap(new HashMap<>());
 
     @Override
     public List<Product> findAll() {
-        return clubs.values()
+        return products.values()
                 .stream()
                 .toList();
     }
 
     @Override
     public Optional<Product> findById(UUID id) {
-        log.info("Find product by id: {}", clubs.get(id));
-        return Optional.ofNullable(clubs.get(id));
+        log.info("Find product by id: {}", products.get(id));
+        return Optional.ofNullable(products.get(id));
     }
 
     @Override
     public UUID save(Product product) {
-        return Objects.requireNonNull(clubs.put(product.getId(), product))
+        return Objects.requireNonNull(products.put(product.getId(), product))
                 .getId();
     }
 
     @Override
     public Product update(Product product) {
-        return clubs.put(product.getId(), product);
+        return products.put(product.getId(), product);
     }
 
     @Override
     public void deleteById(UUID id) {
-        clubs.remove(id);
+        products.remove(id);
     }
 }
