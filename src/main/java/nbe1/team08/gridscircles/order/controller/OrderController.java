@@ -4,8 +4,8 @@ import java.net.URI;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import nbe1.team08.gridscircles.common.response.Success;
-import nbe1.team08.gridscircles.order.controller.dto.OrderCancel;
-import nbe1.team08.gridscircles.order.controller.dto.OrderCreate;
+import nbe1.team08.gridscircles.order.service.dto.OrderCancelCommand;
+import nbe1.team08.gridscircles.order.service.dto.OrderCreateCommand;
 import nbe1.team08.gridscircles.order.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,19 +42,19 @@ public class OrderController {
 
     @PostMapping("/orders")
     public ResponseEntity<Success<?>> createOrder(
-            @RequestBody final OrderCreate orderCreate
+            @RequestBody final OrderCreateCommand orderCreateCommand
     ) {
-        var createdUuid = orderService.createOrder(orderCreate.orderer(), orderCreate.orderItems());
+        var createdUuid = orderService.createOrder(orderCreateCommand);
         return ResponseEntity.created(URI.create("/orders/" + createdUuid))
                 .body(Success.of(201, createdUuid));
     }
 
     @PutMapping("/orders/cancel")
     public ResponseEntity<Success<?>> cancelOrder(
-            @RequestBody final OrderCancel orderCancel
+            @RequestBody final OrderCancelCommand orderCancelCommand
     ) {
-        orderService.cancelOrder(orderCancel.uuid(), orderCancel.email());
+        orderService.cancelOrder(orderCancelCommand);
         return ResponseEntity.ok()
-                .body(Success.of(202, "Delete order success"));
+                .body(Success.of(200, "Delete order success"));
     }
 }

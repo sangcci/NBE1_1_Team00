@@ -15,7 +15,6 @@ import jakarta.persistence.Table;
 import java.util.List;
 import java.util.UUID;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import nbe1.team08.gridscircles.common.entity.BaseTime;
@@ -24,7 +23,6 @@ import nbe1.team08.gridscircles.common.entity.BaseTime;
 @Table(name = "orders")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Order extends BaseTime {
 
     @Id
@@ -36,11 +34,21 @@ public class Order extends BaseTime {
     @Enumerated(value = EnumType.STRING)
     private OrderState orderState;
     @OneToMany(
+            mappedBy = "order",
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private List<OrderItem> orderItems;
+
+    public Order(UUID id, Orderer orderer, OrderState orderState, List<OrderItem> orderItems) {
+        orderItems.forEach(orderItem -> orderItem.assignOrder(this));
+
+        this.id = id;
+        this.orderer = orderer;
+        this.orderState = orderState;
+        this.orderItems = orderItems;
+    }
 
     public static Order create(Orderer orderer, List<OrderItem> orderItems) {
         return new Order(
