@@ -11,6 +11,7 @@ public record OrderDetailResponse(
         UUID id,
         Orderer orderer,
         OrderState orderState,
+        long totalPrice,
         List<OrderItemResponse> orderItemResponses
 ) {
 
@@ -22,6 +23,7 @@ public record OrderDetailResponse(
                 order.getId(),
                 order.getOrderer(),
                 order.getOrderState(),
+                order.calculateTotalAmount(),
                 orderItemResponses
         );
     }
