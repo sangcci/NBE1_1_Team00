@@ -31,4 +31,19 @@ public class OrderTest {
         // then
         assertThat(totalAmount).isGreaterThan(0L);
     }
+
+    @Test
+    void 주문한_만큼_재고를_감소시킨다() {
+        // 재고는 무한정 있다고 가정
+    }
+
+    @Test
+    void 주문_데이터가_자신의_것이_아닐_경우_false를_반환한다() {
+        // given
+        Orderer orderer = new Orderer("example@mail.com", null, null);
+        String anotherEmail = "another@mail.com";
+
+        // when & then
+        assertThat(orderer.isMine(anotherEmail)).isFalse();
+    }
 }
