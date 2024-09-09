@@ -35,6 +35,15 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                 .body(Error.of(400, e.getMessage()));
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<Error> handleIllegalStateException(
+            IllegalStateException e
+    ) {
+        log.info("{} -> {}", e, e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Error.of(400, e.getMessage()));
+    }
+
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Error> handleAccessDeniedException(
             AccessDeniedException e
