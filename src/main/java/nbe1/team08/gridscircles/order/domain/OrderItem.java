@@ -33,4 +33,8 @@ public class OrderItem extends BaseTime {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    protected void assignOrder(Order order) {
+        this.order = order;
+    }
 }
